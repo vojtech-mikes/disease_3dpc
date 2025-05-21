@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
-from typing import List, Literal
-from numpy.typing import NDArray
+from typing import Literal
 import plyfile
 import numpy as np
 import pandas as pd
