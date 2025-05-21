@@ -65,11 +65,11 @@ def create_feature_vectors(data_path: Path, typ: Literal["ill", "ok"]) -> pd.Dat
         "percentile_50",
         "percentile_75",
         "skewness",
-        "kurtosis"
+        "kurtosis",
     ]
 
     final_dataframe = pd.DataFrame(feature_vectors)
-    
+
     final_dataframe.columns = labels
     final_dataframe.index = [f"{typ}_{Path(x).stem}" for x in plant_files]
 

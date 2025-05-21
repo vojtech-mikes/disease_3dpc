@@ -17,10 +17,14 @@ ok_cossim = cosine_similarity(ok_feat_vectors)
 
 all_dataframe = pd.concat([ill_feat_vectors, ok_feat_vectors], ignore_index=False)
 
-all_cossim_df = pd.DataFrame(cosine_similarity(all_dataframe), index=all_dataframe.index, columns=all_dataframe.index)
+all_cossim_df = pd.DataFrame(
+    cosine_similarity(all_dataframe),
+    index=all_dataframe.index,
+    columns=all_dataframe.index,
+)
 
 # Plot the heatmap
-plt.figure(figsize=(14, 12))  # adjust size as needed
+plt.figure(figsize=(14, 12))
 sns.heatmap(
     all_cossim_df,
     annot=True,
@@ -28,10 +32,10 @@ sns.heatmap(
     cmap="coolwarm",
     xticklabels=True,
     yticklabels=True,
-    annot_kws={"size": 6}  # adjust font size for clarity
+    annot_kws={"size": 6},
 )
 
-plt.xticks(rotation=45, ha='right')
+plt.xticks(rotation=45, ha="right")
 plt.title("Cosine Similarity Between Samples")
 plt.tight_layout()
 plt.savefig("plot.png")
