@@ -4,10 +4,11 @@ from typing import List, Literal
 from numpy.typing import NDArray
 import plyfile
 import numpy as np
+import pandas as pd
 from scipy.stats import skew, kurtosis
 
 
-def create_feature_vectors(data_path: Path, typ: Literal["ill", "ok"]) -> List[NDArray]:
+def create_feature_vectors(data_path: Path, typ: Literal["ill", "ok"]) -> pd.DataFrame:
     plant_paths = os.path.join(data_path, typ)
 
     plant_files = [
@@ -54,4 +55,22 @@ def create_feature_vectors(data_path: Path, typ: Literal["ill", "ok"]) -> List[N
             )
         )
 
-    return feature_vectors
+    labels = [
+        "mean",
+        "median",
+        "min",
+        "max",
+        "std",
+        "percentile_25",
+        "percentile_50",
+        "percentile_75",
+        "skewness",
+        "kurtosis"
+    ]
+
+    final_dataframe = pd.DataFrame(feature_vectors)
+    
+    final_dataframe.columns = labels
+    final_dataframe.index = [f"{typ}_{Path(x).stem}" for x in plant_files]
+
+    return final_dataframe
